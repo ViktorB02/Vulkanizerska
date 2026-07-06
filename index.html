@@ -11,9 +11,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* ============================================
-   DRS ВУЛКАНИЗЕРСКА — design tokens
-   ============================================ */
 :root{
   --bg: #0a0a0a;
   --bg-alt: #131312;
@@ -46,7 +43,7 @@ body{
   line-height:1.5;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
-  cursor:none;
+  cursor:auto;
   min-height:100vh;
   min-height:100dvh;
   overscroll-behavior-y:none;
@@ -70,31 +67,17 @@ ul{ list-style:none; }
   *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
 }
 
-/* film grain overlay */
 .grain{
   position:fixed; inset:0; z-index:9999; pointer-events:none;
   opacity:.045; mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 @media (max-width:860px), (hover:none){
-  .grain{ display:none; } /* mix-blend-mode on a fixed layer causes white-flash repaint bugs on some mobile GPUs */
+  .grain{ display:none; }
 }
 
-/* custom cursor */
-.cursor-dot,.cursor-ring{
-  position:fixed; top:0; left:0; z-index:9998; pointer-events:none;
-  border-radius:50%; transform:translate(-50%,-50%);
-}
-.cursor-dot{ width:6px; height:6px; background:var(--fg); transition:opacity .2s; }
-.cursor-ring{
-  width:34px; height:34px; border:1px solid var(--fg-dim);
-  transition:width .25s var(--ease), height .25s var(--ease), border-color .25s, background .25s;
-}
-.cursor-ring.hover{ width:56px; height:56px; border-color:var(--fg); background:rgba(242,240,235,.06); }
+.cursor-dot,.cursor-ring{ display:none; }
 
-/* ============================================
-   NAV
-   ============================================ */
 .nav{
   position:fixed; top:0; left:0; right:0; z-index:500;
   background:rgba(10,10,10,.97);
@@ -146,9 +129,6 @@ ul{ list-style:none; }
   .mobile-menu{ display:flex; }
 }
 
-/* ============================================
-   BUTTONS
-   ============================================ */
 .btn{
   display:inline-flex; align-items:center; justify-content:center; gap:8px;
   padding:12px 22px; font-size:14px; font-weight:600; letter-spacing:.2px;
@@ -163,15 +143,9 @@ ul{ list-style:none; }
 .btn:disabled{ opacity:.3; pointer-events:none; }
 .magnetic{ will-change:transform; }
 
-/* ============================================
-   REVEAL ON SCROLL
-   ============================================ */
 .reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
 .reveal.in{ opacity:1; transform:translateY(0); }
 
-/* ============================================
-   HERO
-   ============================================ */
 .hero{
   position:relative; min-height:100vh; display:flex; align-items:center;
   padding:120px 28px 60px; overflow:hidden;
@@ -234,9 +208,6 @@ ul{ list-style:none; }
 .scroll-cue span{ width:4px; height:8px; background:var(--fg); border-radius:2px; animation:scrolldown 1.6s ease-in-out infinite; }
 @keyframes scrolldown{ 0%{ transform:translateY(0); opacity:1; } 70%{ opacity:0; } 100%{ transform:translateY(16px); opacity:0; } }
 
-/* ============================================
-   SECTION SHARED
-   ============================================ */
 section{ padding:110px 28px; position:relative; background:var(--bg); }
 .section-head{ max-width:640px; margin:0 auto 56px; text-align:left; }
 .section-head h2{
@@ -245,9 +216,6 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
 }
 .section-sub{ color:var(--fg-dim); font-size:15.5px; max-width:520px; }
 
-/* ============================================
-   CENOVNIK / PRICE TABLE
-   ============================================ */
 .cenovnik{ background:var(--bg-alt); border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft); }
 .price-table-wrap{ max-width:1280px; margin:0 auto; overflow-x:auto; border:1px solid var(--line); }
 .price-table{ width:100%; border-collapse:collapse; min-width:640px; }
@@ -283,9 +251,6 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
   .price-table tbody td.cell-total{ grid-column:2; grid-row:2; font-size:16px; color:var(--fg-dim); }
 }
 
-/* ============================================
-   ZAKAZI / WORK ORDER (signature element)
-   ============================================ */
 .zakazi{ max-width:1280px; margin:0 auto; }
 .workorder{
   border:1px solid var(--line); background:var(--bg-alt);
@@ -315,7 +280,6 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
 .wo-pane-title{ font-family:var(--font-display); font-size:22px; text-transform:uppercase; margin-bottom:24px; letter-spacing:.3px; }
 .wo-hint{ color:var(--fg-faint); font-size:13px; margin-top:18px; }
 
-/* dial */
 .dial-wrap{ position:relative; width:min(100%, 380px); aspect-ratio:1; margin:0 auto; }
 .dial{ width:100%; height:100%; }
 .dial-seg{ cursor:pointer; }
@@ -331,7 +295,6 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
 .dial-unit{ font-size:11px; color:var(--fg-faint); text-transform:uppercase; letter-spacing:1.5px; margin-top:4px; }
 .dial-price{ margin-top:10px; font-family:var(--font-mono); font-size:11px; color:var(--fg-dim); text-align:center; }
 
-/* services */
 .service-list{ display:flex; flex-direction:column; gap:1px; background:var(--line); border:1px solid var(--line); }
 .service-item{
   background:var(--bg-alt); padding:16px 18px; display:flex; align-items:center; justify-content:space-between;
@@ -345,7 +308,6 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
 .service-item.active .service-item-desc{ color:#3a3a38; }
 .service-price{ font-family:var(--font-mono); font-size:13px; color:var(--fg-dim); white-space:nowrap; margin-left:12px; }
 
-/* quantity picker */
 .qty-picker{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:22px; flex-wrap:wrap; }
 .qty-label{ font-size:12px; color:var(--fg-dim); text-transform:uppercase; letter-spacing:.8px; }
 .qty-btns{ display:flex; gap:8px; }
@@ -356,7 +318,6 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
 .qty-btn:hover{ border-color:var(--fg-dim); }
 .qty-btn.active{ background:var(--fg); color:var(--bg); border-color:var(--fg); }
 
-/* date/time */
 .day-picker{ display:flex; gap:8px; overflow-x:auto; padding-bottom:8px; margin-bottom:20px; max-width:100%; -webkit-overflow-scrolling:touch; scrollbar-width:thin; }
 .day-btn{
   flex:0 0 auto; min-width:64px; background:var(--bg-raise); border:1px solid var(--line); color:var(--fg);
@@ -382,7 +343,6 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
 .slot-btn:disabled{ opacity:.2; text-decoration:line-through; pointer-events:none; }
 @media (max-width:480px){ .slot-grid{ grid-template-columns:repeat(3,1fr); } }
 
-/* form */
 .form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
 .field-wide{ grid-column:1 / -1; }
 .field{ display:flex; flex-direction:column; gap:8px; }
@@ -395,7 +355,6 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
 .field input::placeholder{ color:var(--fg-faint); }
 @media (max-width:520px){ .form-grid{ grid-template-columns:1fr; } }
 
-/* ticket (right panel) */
 .ticket{
   padding:40px; display:flex; align-items:center; justify-content:center;
   background:
@@ -434,7 +393,6 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
 .wo-progress{ flex:1; height:2px; background:var(--line); position:relative; }
 .wo-progress span{ position:absolute; left:0; top:0; height:100%; background:var(--fg); width:25%; transition:width .4s var(--ease); }
 
-/* my bookings */
 .my-bookings{ max-width:1280px; margin:60px auto 0; }
 .my-bookings h3{ font-family:var(--font-display); font-size:20px; text-transform:uppercase; margin-bottom:18px; }
 .my-bookings-list{ display:flex; flex-direction:column; gap:1px; background:var(--line); border:1px solid var(--line); }
@@ -444,9 +402,6 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
 .mb-cancel{ background:none; border:1px solid var(--line); color:var(--fg-dim); padding:7px 14px; font-size:12px; border-radius:var(--radius); }
 .mb-cancel:hover{ border-color:var(--fg); color:var(--fg); }
 
-/* ============================================
-   KONTAKT
-   ============================================ */
 .kontakt-grid{ max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
 @media (max-width:860px){ .kontakt-grid{ grid-template-columns:1fr; gap:36px; } }
 .kontakt-list{ margin:28px 0 32px; display:flex; flex-direction:column; gap:14px; }
@@ -470,7 +425,6 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
   color-scheme:light;
 }
 
-/* На мобилен CSS filter врз Google Maps iframe може да даде црн екран. */
 @media (max-width:860px), (hover:none){
   .map-embed{ background:#e8e8e8; }
   .map-embed iframe{
@@ -485,16 +439,10 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
 }
 .map-open-link:hover{ color:var(--fg); border-color:var(--fg); }
 
-/* ============================================
-   FOOTER
-   ============================================ */
 .footer{ border-top:1px solid var(--line-soft); padding:36px 28px; }
 .footer-inner{ max-width:1280px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
 .footer-inner p{ color:var(--fg-faint); font-size:12.5px; }
 
-/* ============================================
-   TOAST
-   ============================================ */
 .toast{
   position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(20px);
   background:var(--fg); color:var(--bg); padding:14px 24px; border-radius:var(--radius);
@@ -507,10 +455,7 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
 <body>
 
 <div class="grain"></div>
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
 
-<!-- ===== NAV ===== -->
 <header class="nav" id="nav">
   <div class="nav-inner">
     <a href="#top" class="brand">
@@ -546,7 +491,6 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
   </div>
 </header>
 
-<!-- ===== HERO ===== -->
 <section class="hero" id="top">
   <div class="tread-parallax" id="treadParallax" aria-hidden="true"></div>
   <div class="hero-inner">
@@ -556,15 +500,14 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
       <span class="scan" style="animation-delay:.08s">НА ГУМИ</span>
       <span class="scan hero-title-thin" style="animation-delay:.16s">без чекање во ред.</span>
     </h1>
-    <p class="hero-sub reveal">Закажи термин онлајн за 30 секунди. Ти избираш големина на гума и услуга,
-      ние ти го чуваме местото на дигалката.</p>
+    <p class="hero-sub reveal">Закажи термин онлајн за 30 секунди</p>
     <div class="hero-cta reveal">
       <a href="#zakazi" class="btn btn-primary btn-lg magnetic" data-cursor="link">Закажи термин →</a>
       <a href="#cenovnik" class="btn btn-ghost btn-lg magnetic" data-cursor="link">Види ценовник</a>
     </div>
     <div class="hero-stats reveal">
       <div class="stat">
-        <span class="stat-num" data-count="4">0</span>
+        <span class="stat-num" data-count="5">0</span>
         <span class="stat-label">групи димензии<br>13″–22″</span>
       </div>
       <div class="stat-divider"></div>
@@ -604,7 +547,6 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
   <button class="scroll-cue" id="scrollCue" aria-label="Скролувај надолу"><span></span></button>
 </section>
 
-<!-- ===== CENOVNIK ===== -->
 <section class="cenovnik" id="cenovnik">
   <div class="section-head reveal">
     <p class="eyebrow">Ценовник</p>
@@ -627,7 +569,6 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
   <p class="price-note reveal">* Лепење (вулканизирање) на пробушена гума — 300 ден по гума, без разлика на димензија.</p>
 </section>
 
-<!-- ===== ZAKAZI (SIGNATURE BOOKING) ===== -->
 <section class="zakazi" id="zakazi">
   <div class="section-head reveal">
     <p class="eyebrow">Работен налог бр. <span id="ticketPreviewNum">000</span></p>
@@ -637,7 +578,6 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
 
   <div class="workorder reveal" id="workorder">
 
-    <!-- STEP RAIL -->
     <div class="wo-steps" id="woSteps">
       <button class="wo-step active" data-step="1"><span>01</span>Димензија</button>
       <button class="wo-step" data-step="2"><span>02</span>Услуга</button>
@@ -646,10 +586,8 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
     </div>
 
     <div class="wo-body">
-      <!-- LEFT: interactive controls -->
       <div class="wo-panel">
 
-        <!-- STEP 1: DIAL -->
         <div class="wo-pane active" data-pane="1">
           <h3 class="wo-pane-title">Избери димензија на гума</h3>
           <div class="dial-wrap">
@@ -660,10 +598,9 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
               <span class="dial-price" id="dialPriceLabel">Избери димензија</span>
             </div>
           </div>
-          <p class="wo-hint">Кликни на точната димензија на фелната. Димензијата е означена на гумата, на пример 205/55<b>R16</b>.</p>
+          <p class="wo-hint">Кликни на точната димензија на гумата. Димензијата е означена на гумата, на пример 205/55<b>R16</b>. <br>Ако бараш само полнење на клима, изборот тука не влијае на цената, избери која било.</p>
         </div>
 
-        <!-- STEP 2: SERVICES -->
         <div class="wo-pane" data-pane="2">
           <h3 class="wo-pane-title">Која услуга ти треба?</h3>
           <div class="service-list" id="serviceList"></div>
@@ -673,7 +610,6 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
           </div>
         </div>
 
-        <!-- STEP 3: DATE/TIME -->
         <div class="wo-pane" data-pane="3">
           <h3 class="wo-pane-title">Избери термин</h3>
           <div class="day-picker" id="dayPicker"></div>
@@ -681,7 +617,6 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
           <p class="wo-hint" id="slotHint">Избери датум за да ги видиш слободните термини.</p>
         </div>
 
-        <!-- STEP 4: CONTACT -->
         <div class="wo-pane" data-pane="4">
           <h3 class="wo-pane-title">Твои податоци</h3>
           <div class="form-grid">
@@ -706,7 +641,6 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
 
       </div>
 
-      <!-- RIGHT: live receipt ticket -->
       <div class="ticket" id="ticket">
         <div class="ticket-inner">
           <div class="ticket-top">
@@ -739,14 +673,12 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
     </div>
   </div>
 
-  <!-- MY BOOKINGS -->
   <div class="my-bookings reveal" id="myBookingsWrap" hidden>
     <h3>Твои закажани термини</h3>
     <div id="myBookingsList" class="my-bookings-list"></div>
   </div>
 </section>
 
-<!-- ===== KONTAKT ===== -->
 <section class="kontakt" id="kontakt">
   <div class="kontakt-grid">
     <div class="kontakt-info reveal">
@@ -785,42 +717,37 @@ section{ padding:110px 28px; position:relative; background:var(--bg); }
 <div class="toast" id="toast"></div>
 
 <script>
-/* ==========================================================
-   DRS ВУЛКАНИЗЕРСКА — app.js
-   Сите цени/термини/услуги се лесно менливи во CONFIG подолу.
-   ========================================================== */
 (function(){
 "use strict";
 
-/* ---------------- CONFIG (edit me) ---------------- */
 const SIZE_GROUPS = [
   { id:'g1', label:'13″–14″', sizes:[13,14],       mount:150, balance:200, set4:1400 },
-  { id:'g2', label:'15″–16″', sizes:[15,16],       mount:200, balance:260, set4:1600 },
-  { id:'g3', label:'17″–18″', sizes:[17,18],       mount:260, balance:330, set4:1700 },
-  { id:'g4', label:'19″–22″', sizes:[19,20,21,22], mount:350, balance:370, set4:1900 },
+  { id:'g2', label:'15″',     sizes:[15],          mount:180, balance:240, set4:1500 },
+  { id:'g3', label:'16″',     sizes:[16],          mount:200, balance:260, set4:1600 },
+  { id:'g4', label:'17″–18″', sizes:[17,18],       mount:260, balance:330, set4:1700 },
+  { id:'g5', label:'19″–22″', sizes:[19,20,21,22], mount:350, balance:370, set4:1900 },
 ];
 
-// Тркалото ги прикажува сите димензии поединечно, но цената се зема од соодветната група.
 const TIRE_SIZES = Array.from({length:10}, (_,i)=>{
   const value = i + 13;
   const group = SIZE_GROUPS.find(g=>g.sizes.includes(value));
   return { id:`s${value}`, value, label:`${value}″`, groupId:group.id };
 });
-const LEPENJE_PRICE = 300; // лепење на гума, фиксна цена по гума
+const LEPENJE_PRICE = 300;
+const KLIMA_PRICE = 1500;
 const SERVICES = [
   { id:'mount',   name:'Монтажа и демонтажа',              desc:'Демонтажа и монтажа на гума' },
   { id:'balance', name:'Балансирање',                       desc:'Балансирање на гума' },
   { id:'both',    name:'Монтажа, демонтажа и балансирање',  desc:'Комплетна услуга по гума' },
   { id:'lepenje', name:'Лепење на гума',                    desc:'Вулканизирање пробушена гума', fixed:LEPENJE_PRICE },
+  { id:'klima',   name:'Полнење на авто клима со стандардизиран фреон', desc:'Не зависи од димензија на гума', fixed:KLIMA_PRICE, noQty:true },
 ];
-const OPEN_HOUR = 8, CLOSE_HOUR = 18, SLOT_MIN = 60, BAYS = 2; // 2 дигалки истовремено
+const OPEN_HOUR = 8, CLOSE_HOUR = 18, SLOT_MIN = 60, BAYS = 2;
 const DAYS_AHEAD = 10;
 const STORAGE_KEY = 'drs_bookings_v1';
 
-/* ---------------- state ---------------- */
 let state = { size:null, service:null, qty:null, date:null, time:null, step:1 };
 
-/* ================= UTIL ================= */
 const $ = (s,el=document)=>el.querySelector(s);
 const $$ = (s,el=document)=>Array.from(el.querySelectorAll(s));
 const fmtPrice = n => n.toLocaleString('mk-MK') + ' ден';
@@ -832,7 +759,7 @@ const groupById = id => SIZE_GROUPS.find(g=>g.id===id);
 const sizeById = id => TIRE_SIZES.find(s=>s.id===id);
 const groupForSizeId = id => {
   const size = sizeById(id);
-  return size ? groupById(size.groupId) : groupById(id); // поддршка за стари зачувани термини
+  return size ? groupById(size.groupId) : groupById(id);
 };
 const displaySize = id => {
   const size = sizeById(id);
@@ -855,29 +782,6 @@ function nextTicketNumber(){
   return max + 1;
 }
 
-/* ================= CURSOR ================= */
-(function cursor(){
-  const dot = $('#cursorDot'), ring = $('#cursorRing');
-  if(!dot || window.matchMedia('(hover:none)').matches) return;
-  let rx=0, ry=0, mx=0, my=0;
-  window.addEventListener('mousemove', e=>{
-    mx=e.clientX; my=e.clientY;
-    dot.style.left = mx+'px'; dot.style.top = my+'px';
-  });
-  (function loop(){
-    rx += (mx-rx)*0.18; ry += (my-ry)*0.18;
-    ring.style.left = rx+'px'; ring.style.top = ry+'px';
-    requestAnimationFrame(loop);
-  })();
-  document.addEventListener('mouseover', e=>{
-    if(e.target.closest('a,button,input,.day-btn,.dial-seg,.service-item,.price-row,.slot-btn')) ring.classList.add('hover');
-  });
-  document.addEventListener('mouseout', e=>{
-    if(e.target.closest('a,button,input,.day-btn,.dial-seg,.service-item,.price-row,.slot-btn')) ring.classList.remove('hover');
-  });
-})();
-
-/* ================= MAGNETIC BUTTONS ================= */
 (function magnetic(){
   if(window.matchMedia('(hover:none)').matches) return;
   $$('.magnetic').forEach(btn=>{
@@ -891,7 +795,6 @@ function nextTicketNumber(){
   });
 })();
 
-/* ================= NAV + MOBILE MENU ================= */
 (function nav(){
   const hb = $('#hamburger'), menu = $('#mobileMenu');
   hb.addEventListener('click', ()=>{
@@ -904,7 +807,6 @@ function nextTicketNumber(){
   }));
 })();
 
-/* ================= SCROLL REVEAL ================= */
 (function reveal(){
   const io = new IntersectionObserver(entries=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
@@ -912,7 +814,6 @@ function nextTicketNumber(){
   $$('.reveal').forEach(el=>io.observe(el));
 })();
 
-/* ================= SCROLL CUE + PARALLAX ================= */
 (function scrollFx(){
   const cue = $('#scrollCue');
   cue.addEventListener('click', ()=> $('#cenovnik').scrollIntoView({behavior:'smooth'}));
@@ -929,7 +830,6 @@ function nextTicketNumber(){
   });
 })();
 
-/* ================= COUNT-UP STATS ================= */
 (function counters(){
   const els = $$('[data-count]');
   const io = new IntersectionObserver(entries=>{
@@ -950,12 +850,11 @@ function nextTicketNumber(){
   els.forEach(el=>io.observe(el));
 })();
 
-/* ================= LIVE SLOTS TODAY ================= */
 function computeSlotsFor(dateObj){
   const list = loadBookings();
   const key = dateKey(dateObj);
   const dow = dateObj.getDay();
-  if(dow===0) return []; // недела затворено
+  if(dow===0) return [];
   const slots = [];
   for(let h=OPEN_HOUR; h<CLOSE_HOUR; h+=Math.max(1, Math.round(SLOT_MIN/60))){
     const time = `${pad(h)}:00`;
@@ -973,23 +872,28 @@ function updateLiveSlots(){
   if(el) el.textContent = free;
 }
 
-/* ================= PRICE TABLE ================= */
 function renderPriceTable(){
   const body = $('#priceTableBody');
-  body.innerHTML = SIZE_GROUPS.map((g,i)=>`
+  const groupRows = SIZE_GROUPS.map((g,i)=>`
     <tr>
       <td>${i+1}</td>
       <td>Пневматици ${g.label}</td>
       <td class="cell-total">${fmtPrice(g.set4)}</td>
     </tr>`).join('');
+  const klimaRow = `
+    <tr>
+      <td>–</td>
+      <td>Полнење на авто клима со стандардизиран фреон<br><span style="font-family:var(--font-body);font-size:11px;color:var(--fg-faint)"></span></td>
+      <td class="cell-total">${fmtPrice(KLIMA_PRICE)}</td>
+    </tr>`;
+  body.innerHTML = groupRows + klimaRow;
 }
 
-/* ================= DIAL (STEP 1) ================= */
 function buildDial(){
   const svg = $('#sizeDial');
   const cx=160, cy=160, rOuter=150, rInner=94;
   const n = TIRE_SIZES.length;
-  const gap = 0.028; // мал простор меѓу 10-те сегменти
+  const gap = 0.028;
   const total = Math.PI*2;
   const segAngle = total/n;
   let html='';
@@ -1027,7 +931,6 @@ function syncDial(){
   $('#dialPriceLabel').textContent = group ? `${fmtPrice(group.set4)} / 4 гуми` : 'Избери димензија';
 }
 
-/* ================= SERVICES + QUANTITY (STEP 2) ================= */
 function renderServices(){
   const wrap = $('#serviceList');
   wrap.innerHTML = SERVICES.map(sv=>`
@@ -1055,6 +958,7 @@ function renderServices(){
   });
 }
 function priceLabel(sv){
+  if(sv.id==='klima') return fmtPrice(sv.fixed);
   if(!state.size) return 'избери димензија';
   const g = groupForSizeId(state.size);
   if(sv.id==='lepenje') return fmtPrice(sv.fixed) + ' / гума';
@@ -1069,10 +973,21 @@ function syncServices(){
     item.classList.toggle('active', item.dataset.id===state.service);
     $('.service-price', item).textContent = priceLabel(sv);
   });
+  const currentSv = serviceById(state.service);
+  const qtyPicker = $('#qtyPicker');
+  if(currentSv && currentSv.noQty){
+    qtyPicker.style.display = 'none';
+    state.qty = 1;
+  } else {
+    qtyPicker.style.display = '';
+  }
   $$('.qty-btn').forEach(btn=> btn.classList.toggle('active', parseInt(btn.dataset.qty,10)===state.qty));
 }
 function currentTotal(){
-  if(!state.size || !state.service || !state.qty) return 0;
+  if(!state.service) return 0;
+  const sv = serviceById(state.service);
+  if(sv && sv.noQty) return sv.fixed;
+  if(!state.size || !state.qty) return 0;
   const g = groupForSizeId(state.size);
   if(state.service==='lepenje') return LEPENJE_PRICE*state.qty;
   if(state.service==='mount') return g.mount*state.qty;
@@ -1083,7 +998,6 @@ function currentTotal(){
   return 0;
 }
 
-/* ================= DATE / TIME (STEP 3) ================= */
 function buildDayPicker(){
   const wrap = $('#dayPicker');
   const today = new Date();
@@ -1131,13 +1045,12 @@ function renderSlots(){
   });
 }
 
-/* ================= TICKET (live receipt) ================= */
 function syncTicket(){
   const g = groupForSizeId(state.size);
   $('#tSize').textContent = state.size ? displaySize(state.size) : '—';
   const sv = serviceById(state.service);
   $('#tService').textContent = sv ? sv.name : '—';
-  $('#tQty').textContent = state.qty ? state.qty + (state.qty===1?' гума':' гуми') : '—';
+  $('#tQty').textContent = (sv && sv.noQty) ? '—' : (state.qty ? state.qty + (state.qty===1?' гума':' гуми') : '—');
   $('#tDate').textContent = state.date ? formatDateHuman(state.date) : '—';
   $('#tTime').textContent = state.time || '—';
   $('#tClient').textContent = $('#fName').value || '—';
@@ -1150,7 +1063,6 @@ function formatDateHuman(key){
   return `${d} ${monNames[m-1]}, ${dayNames[dt.getDay()]}`;
 }
 
-/* ================= STEP NAVIGATION ================= */
 function goToStep(n){
   state.step = n;
   $$('.wo-step').forEach(s=>{
@@ -1189,7 +1101,6 @@ function initSteps(){
   ['fName','fPhone'].forEach(id=> $('#'+id).addEventListener('input', syncTicket));
 }
 
-/* ================= SUBMIT BOOKING ================= */
 function submitBooking(){
   const name = $('#fName').value.trim();
   const phone = $('#fPhone').value.trim();
@@ -1226,7 +1137,6 @@ function submitBooking(){
   }, 2600);
 }
 
-/* ================= MY BOOKINGS ================= */
 function renderMyBookings(){
   const list = loadBookings();
   const wrap = $('#myBookingsWrap'), inner = $('#myBookingsList');
@@ -1256,7 +1166,6 @@ function renderMyBookings(){
   });
 }
 
-/* ================= TOAST ================= */
 let toastTimer;
 function toast(msg){
   const el = $('#toast');
@@ -1266,12 +1175,10 @@ function toast(msg){
   toastTimer = setTimeout(()=> el.classList.remove('show'), 3400);
 }
 
-/* ================= HERO TIRE (procedural tread + spokes) ================= */
 function buildHeroTire(){
   const treadGroup = $('#treadGroup'), spokes = $('#spokes');
   if(!treadGroup) return;
   const cx=200, cy=200, r1=170, r2=182;
-  let tread='', spk='';
   for(let i=0;i<48;i++){
     const a = (i/48)*Math.PI*2;
     treadGroup.innerHTML += `<line x1="${cx+r1*Math.cos(a)}" y1="${cy+r1*Math.sin(a)}" x2="${cx+r2*Math.cos(a)}" y2="${cy+r2*Math.sin(a)}"/>`;
@@ -1282,7 +1189,6 @@ function buildHeroTire(){
   }
 }
 
-/* ================= INIT ================= */
 function init(){
   $('#year').textContent = new Date().getFullYear();
   renderPriceTable();
@@ -1299,7 +1205,6 @@ function init(){
 document.addEventListener('DOMContentLoaded', init);
 
 })();
-   
 
 </script>
 </body>
